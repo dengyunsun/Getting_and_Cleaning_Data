@@ -1,6 +1,7 @@
-# Source of data for the project:
-# https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+# Source of data for this project: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
 # This R script does the following:
+
 # 1. Merges the training and the test sets to create one data set.
 
 tmp1 <- read.table("train/X_train.txt")
@@ -22,9 +23,9 @@ indices_of_good_features <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
 X <- X[, indices_of_good_features]
 names(X) <- features[indices_of_good_features, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
-names(X) <- tolower(names(X))  # see last slide of the lecture Editing Text Variables (week 4)
+names(X) <- tolower(names(X))
 
-# 3. Uses descriptive activity names to name the activities in the data set
+# 3. Uses descriptive activity names to name the activities in the data set.
 
 activities <- read.table("activity_labels.txt")
 activities[, 2] = gsub("_", "", tolower(as.character(activities[, 2])))
@@ -56,11 +57,3 @@ for (s in 1:numSubjects) {
     }
 }
 write.table(result, "data_set_with_the_averages.txt")
-
-# res2 <- read.table("data_set_with_the_averages.txt")
-# result[4,4]
-# res2[4,4]
-# res2[4,4]==result[4,4]
-# result[6,4]
-# res2[6,4]
-# res2[6,4]==result[6,4]
